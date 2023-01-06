@@ -5,7 +5,7 @@ namespace Sensedia.API.Context
 {
     public class SensediaContext : DbContext
     {
-        public SensediaContext(DbContextOptionsBuilder<SensediaContext> options)
+        public SensediaContext(DbContextOptions<SensediaContext> options) : base(options)
         {
 
         }
