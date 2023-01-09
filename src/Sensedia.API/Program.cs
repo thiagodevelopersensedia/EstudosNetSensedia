@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 var connectionString = builder.Configuration.GetConnectionString("SensediaLocalSqlServer");
 
-builder.Services.AddDbContext<SensediaContext>(x => x.UseSqlite(connectionString));
+builder.Services.AddDbContext<SensediaContext>(x => x.UseSqlServer(connectionString));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
