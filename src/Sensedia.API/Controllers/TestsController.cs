@@ -1,24 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Sensedia.API.Context;
 using Sensedia.API.Entities;
-using Sensedia.API.Extensions;
 
 namespace Sensedia.API.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductsController: ControllerBase
+    public class TestsController : ControllerBase
     {
         private readonly SensediaContext _sensediaContext;
 
-        public ProductsController(SensediaContext sensediaContext)
+        public TestsController(SensediaContext sensediaContext)
         {
             _sensediaContext = sensediaContext;
         }
 
-        [HttpGet()]
-        public ActionResult<List<Product>> GetProducts()
+        [HttpGet]
+        public ActionResult<List<Product>> GetTests()
         {
             return _sensediaContext.Products.ToList();
         }
