@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Sensedia.API.Context;
 using Sensedia.API.Entities;
-using Sensedia.API.Extensions;
+
 
 namespace Sensedia.API.Controllers
 {
