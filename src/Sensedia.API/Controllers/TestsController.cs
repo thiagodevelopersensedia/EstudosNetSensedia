@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Sensedia.API.Context;
-using Sensedia.API.Entities;
+using Sensedia.Core.Entities;
+using Sensedia.Infrastructure.Context;
 
 namespace Sensedia.API.Controllers
 {
