@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Sensedia.API.Context;
+using Sensedia.Infrastructure.Context;
 
 #nullable disable
 
 namespace Sensedia.API.Migrations
 {
     [DbContext(typeof(SensediaContext))]
-    [Migration("20230113120943_AlterTableName")]
-    partial class AlterTableName
+    [Migration("20230113121743_AlterFieldOldName_Product_Name")]
+    partial class AlterFieldOldNameProductName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,7 +34,8 @@ namespace Sensedia.API.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Product_Name");
 
                     b.HasKey("Id");
 

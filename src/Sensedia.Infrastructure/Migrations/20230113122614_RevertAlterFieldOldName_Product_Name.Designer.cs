@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Sensedia.API.Context;
+using Sensedia.Infrastructure.Context;
 
 #nullable disable
 
 namespace Sensedia.API.Migrations
 {
     [DbContext(typeof(SensediaContext))]
-    [Migration("20230113123050_RevertAlterTableName")]
-    partial class RevertAlterTableName
+    [Migration("20230113122614_RevertAlterFieldOldName_Product_Name")]
+    partial class RevertAlterFieldOldNameProductName
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

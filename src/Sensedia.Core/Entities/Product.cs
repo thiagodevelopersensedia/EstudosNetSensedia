@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Sensedia.API.Entities
+﻿namespace Sensedia.Core.Entities
 {
     public class Product
     {
