@@ -2,6 +2,7 @@
 using Sensedia.Core.Entities;
 using Sensedia.Core.Interfaces.Specifications;
 using Sensedia.Infrastructure.Context;
+using Sensedia.Infrastructure.Specification;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,14 +30,19 @@ namespace Sensedia.Core.Interfaces.Generic
             return await _context.Set<T>().FindAsync(id);
         }
 
-        public Task<T> GetEntityWithSpecAsync(ISpecification<T> spec)
+        public async Task<T> GetEntityWithSpecAsync(ISpecification<T> spec)
         {
-            throw new NotImplementedException();
+            return await ApplySpecification(spec).FirstOrDefaultAsync();
         }
 
-        public Task<IReadOnlyList<T>> GetListEntityAsync(ISpecification<T> spec)
+        public async Task<IReadOnlyList<T>> GetListEntityAsync(ISpecification<T> spec)
         {
-            throw new NotImplementedException();
+            return await ApplySpecification(spec).ToListAsync();
+        }
+
+        private IQueryable<T> ApplySpecification(ISpecification<T> spec)
+        {
+            return SpacificationEvaluator<T>.GetQuery(_context.Set<T>().AsQueryable(), spec);
         }
     }
 }
