@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore; //ORM Database (Relational, noSQL)
+using Microsoft.EntityFrameworkCore;
 using Sensedia.Core.Entities;
 using Sensedia.Core.Interfaces.Generic;
 using Sensedia.Core.Interfaces.Products;
@@ -29,6 +29,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

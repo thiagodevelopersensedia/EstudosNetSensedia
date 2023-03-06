@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Sensedia.Core.DTO;
 using Sensedia.Core.Entities;
 using Sensedia.Core.Entities.Specifications.Params.Products;
@@ -14,11 +15,14 @@ namespace Sensedia.API.Controllers
     {
         private readonly IProductRepository _productRepository;
         private readonly IGenericRepository<Product> _productsRepo;
+        private readonly IMapper _mapper;
 
-        public ProductsController(IProductRepository productRepository, IGenericRepository<Product> productsRepo)
+        public ProductsController(IProductRepository productRepository,
+            IGenericRepository<Product> productsRepo, IMapper mapper)
         {
             _productRepository = productRepository;
             _productsRepo = productsRepo;
+            _mapper = mapper;
         }
 
         [HttpGet("get-all")]
@@ -28,15 +32,8 @@ namespace Sensedia.API.Controllers
 
             var productList = await _productsRepo.GetListEntityAsync(spec);
 
-            return Ok(productList.Select(x => new ProductToReturnDTO {
-                Id = x.Id,
-                ProducDescription = x.Description,
-                ProductName = x.Name,
-                PictureUrl = x.PictureUrl,
-                ProductPrice = x.Price,
-                ProductBrand = x.ProductBrand.Name,
-                ProductType = x.ProductType.Name
-            }));
+            var productDTOList = _mapper.Map<List<ProductToReturnDTO>>(productList);
+            return Ok(productDTOList);
         }
 
         [HttpGet("get-product")]
@@ -46,35 +43,11 @@ namespace Sensedia.API.Controllers
 
             var product = await _productsRepo.GetEntityWithSpecAsync(spec);
 
-            return Ok(new ProductToReturnDTO
-            {
-                Id = product.Id,
-                ProducDescription = product.Description,
-                ProductName = product.Name,
-                PictureUrl = product.PictureUrl,
-                ProductPrice = product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
-            });
+
+            var productDTO = _mapper.Map<ProductToReturnDTO>(product);
+            return Ok(productDTO);
         }
 
-        [HttpGet("get-details")]
-        public async Task<ActionResult<Product>> GetProductsDetails([FromQuery]ProductSpecParams productSpecParams)
-        {
-            var spec = new ProductsWithTypesAndBrandsSpecification(productSpecParams);
 
-            var product = await _productsRepo.GetEntityWithSpecAsync(spec);
-
-            return Ok(new ProductToReturnDTO
-            {
-                Id = product.Id,
-                ProducDescription= product.Description,
-                ProductName= product.Name,
-                PictureUrl = product.PictureUrl,
-                ProductPrice= product.Price,
-                ProductBrand = product.ProductBrand.Name,
-                ProductType = product.ProductType.Name
-            });
-        }
     }
 }
