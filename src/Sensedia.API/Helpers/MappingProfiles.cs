@@ -13,7 +13,8 @@ namespace Sensedia.API.Helpers
                 .ForMember(p => p.ProductPrice, o => o.MapFrom(x => x.Price))
                 .ForMember(p => p.ProducDescription, o => o.MapFrom(x => x.Description))
                 .ForMember(p => p.ProductBrand, o => o.MapFrom(x => x.ProductBrand.Name))
-                .ForMember(p => p.ProductType, o => o.MapFrom(x => x.ProductType.Name));
+                .ForMember(p => p.ProductType, o => o.MapFrom(x => x.ProductType.Name))
+                .ForMember(p => p.PictureUrl, o => o.MapFrom<ProductUrlResolver>());
         }
 
     }

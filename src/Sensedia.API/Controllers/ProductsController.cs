@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Sensedia.API.Helpers;
 using Sensedia.Core.DTO;
 using Sensedia.Core.Entities;
 using Sensedia.Core.Entities.Specifications.Params.Products;
@@ -28,6 +29,9 @@ namespace Sensedia.API.Controllers
         [HttpGet("get-all")]
         public async  Task<ActionResult<List<ProductToReturnDTO>>> GetProducts()
         {
+            var cpf = "12378";
+            var result = cpf.FormatarCPF();
+
             var spec = new ProductsWithTypesAndBrandsSpecification();
 
             var productList = await _productsRepo.GetListEntityAsync(spec);
