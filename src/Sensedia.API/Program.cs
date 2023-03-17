@@ -9,6 +9,18 @@ using Sensedia.Infrastructure.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var fileCustomEnv = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
+if (fileCustomEnv == null)
+{
+    fileCustomEnv = "appsettings.Development.json";
+}
+
+var configManager = new ConfigurationBuilder()
+     .AddJsonFile(Path.Combine(Environment.CurrentDirectory, "appsettings.json"), false, true)
+     .AddJsonFile(Path.Combine(Environment.CurrentDirectory, fileCustomEnv), true, true)
+    .AddEnvironmentVariables()
+    .Build();
+
 // Add services to the container.
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
