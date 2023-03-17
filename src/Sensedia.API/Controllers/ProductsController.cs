@@ -10,9 +10,7 @@ using Sensedia.Core.Interfaces.Products;
 
 namespace Sensedia.API.Controllers
 {
-    [ApiController]
-    [Route("api/v1/[controller]")]
-    public class ProductsController: ControllerBase
+    public class ProductsController: BaseApiController
     {
         private readonly IProductRepository _productRepository;
         private readonly IGenericRepository<Product> _productsRepo;
@@ -50,6 +48,12 @@ namespace Sensedia.API.Controllers
 
             var productDTO = _mapper.Map<ProductToReturnDTO>(product);
             return Ok(productDTO);
+        }
+
+        [HttpPost("save-product")]
+        public async Task<ActionResult<Product>> PostSaveAndUpdateProduct(Product product)
+        {
+            return Ok();
         }
 
 
