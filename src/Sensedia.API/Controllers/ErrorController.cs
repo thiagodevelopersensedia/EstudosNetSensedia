@@ -1,0 +1,15 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Sensedia.API.Error;
+
+namespace Sensedia.API.Controllers
+{
+    [Route("errors/{code}")]
+    public class ErrorController : BaseApiController
+    {
+        [HttpGet]
+        public IActionResult Error(int code)
+        {
+            return new ObjectResult(new ApiResponse(code));
+        }
+    }
+}
