@@ -377,3 +377,7 @@ FodyWeavers.xsd
 *.db-wal
 
 # End of https://www.toptal.com/developers/gitignore/api/database
+/src/Sensedia.API/appsettings.thiago.json
+/src/Sensedia.API/SensediaDB-wal
+/src/Sensedia.API/SensediaDB-shm
+/src/Sensedia.API/SensediaDB
