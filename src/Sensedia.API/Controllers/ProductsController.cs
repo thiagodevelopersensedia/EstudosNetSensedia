@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Sensedia.API.Error;
 using Sensedia.API.Helpers;
 using Sensedia.Core.DTO;
 using Sensedia.Core.Entities;
@@ -39,6 +40,8 @@ namespace Sensedia.API.Controllers
         }
 
         [HttpGet("get-product")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ApiResponse),StatusCodes.Status404NotFound)]
         public async Task<ActionResult<Product>> GetProduct(int productId)
         {
             var spec = new ProductsWithTypesAndBrandsSpecification(productId);
